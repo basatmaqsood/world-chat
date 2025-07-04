@@ -1,0 +1,7 @@
+
+{
+  "model": "gemini-2.5-flash",
+  "apiEndpoint": "https://generativelanguage.googleapis.com/v1beta",
+  "reasoning": false,
+  "apiKey": "AIzaSyA3FKb64ZVVAcUPuRTEYdIgqvaW9j1QwlE"
+} 

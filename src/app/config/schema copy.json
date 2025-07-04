@@ -1,0 +1,158 @@
+{
+  "database": "sakila",
+  "tables": {
+    "actor": {
+      "columns": {
+        "actor_id": "INT PRIMARY KEY",
+        "first_name": "VARCHAR(45)",
+        "last_name": "VARCHAR(45)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "address": {
+      "columns": {
+        "address_id": "INT PRIMARY KEY",
+        "address": "VARCHAR(50)",
+        "address2": "VARCHAR(50)",
+        "district": "VARCHAR(20)",
+        "city_id": "INT FOREIGN KEY REFERENCES city(city_id)",
+        "postal_code": "VARCHAR(10)",
+        "phone": "VARCHAR(20)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "category": {
+      "columns": {
+        "category_id": "INT PRIMARY KEY",
+        "name": "VARCHAR(25)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "city": {
+      "columns": {
+        "city_id": "INT PRIMARY KEY",
+        "city": "VARCHAR(50)",
+        "country_id": "INT FOREIGN KEY REFERENCES country(country_id)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "country": {
+      "columns": {
+        "country_id": "INT PRIMARY KEY",
+        "country": "VARCHAR(50)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "customer": {
+      "columns": {
+        "customer_id": "INT PRIMARY KEY",
+        "store_id": "INT FOREIGN KEY REFERENCES store(store_id)",
+        "first_name": "VARCHAR(45)",
+        "last_name": "VARCHAR(45)",
+        "email": "VARCHAR(50)",
+        "address_id": "INT FOREIGN KEY REFERENCES address(address_id)",
+        "active": "BOOLEAN",
+        "create_date": "DATETIME",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "film": {
+      "columns": {
+        "film_id": "INT PRIMARY KEY",
+        "title": "VARCHAR(255)",
+        "description": "TEXT",
+        "release_year": "YEAR",
+        "language_id": "INT FOREIGN KEY REFERENCES language(language_id)",
+        "original_language_id": "INT FOREIGN KEY REFERENCES language(language_id)",
+        "rental_duration": "INT",
+        "rental_rate": "DECIMAL(4,2)",
+        "length": "INT",
+        "replacement_cost": "DECIMAL(5,2)",
+        "rating": "ENUM('G','PG','PG-13','R','NC-17')",
+        "special_features": "SET('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "film_actor": {
+      "columns": {
+        "actor_id": "INT FOREIGN KEY REFERENCES actor(actor_id)",
+        "film_id": "INT FOREIGN KEY REFERENCES film(film_id)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "film_category": {
+      "columns": {
+        "film_id": "INT FOREIGN KEY REFERENCES film(film_id)",
+        "category_id": "INT FOREIGN KEY REFERENCES category(category_id)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "film_text": {
+      "columns": {
+        "film_id": "INT PRIMARY KEY REFERENCES film(film_id)",
+        "title": "VARCHAR(255)",
+        "description": "TEXT"
+      }
+    },
+    "inventory": {
+      "columns": {
+        "inventory_id": "INT PRIMARY KEY",
+        "film_id": "INT FOREIGN KEY REFERENCES film(film_id)",
+        "store_id": "INT FOREIGN KEY REFERENCES store(store_id)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "language": {
+      "columns": {
+        "language_id": "INT PRIMARY KEY",
+        "name": "CHAR(20)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "payment": {
+      "columns": {
+        "payment_id": "INT PRIMARY KEY",
+        "customer_id": "INT FOREIGN KEY REFERENCES customer(customer_id)",
+        "staff_id": "INT FOREIGN KEY REFERENCES staff(staff_id)",
+        "rental_id": "INT FOREIGN KEY REFERENCES rental(rental_id)",
+        "amount": "DECIMAL(5,2)",
+        "payment_date": "DATETIME",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "rental": {
+      "columns": {
+        "rental_id": "INT PRIMARY KEY",
+        "rental_date": "DATETIME",
+        "inventory_id": "INT FOREIGN KEY REFERENCES inventory(inventory_id)",
+        "customer_id": "INT FOREIGN KEY REFERENCES customer(customer_id)",
+        "return_date": "DATETIME",
+        "staff_id": "INT FOREIGN KEY REFERENCES staff(staff_id)",
+        "last_update": "TIMESTAMP"
+      }
+    },
+    "staff": {
+      "columns": {
+        "staff_id": "INT PRIMARY KEY",
+        "first_name": "VARCHAR(45)",
+        "last_name": "VARCHAR(45)",
+        "address_id": "INT FOREIGN KEY REFERENCES address(address_id)",
+        "email": "VARCHAR(50)",
+        "store_id": "INT FOREIGN KEY REFERENCES store(store_id)",
+        "active": "BOOLEAN",
+        "username": "VARCHAR(16)",
+        "password": "VARCHAR(40)",
+        "last_update": "TIMESTAMP",
+        "picture": "BLOB"
+      }
+    },
+    "store": {
+      "columns": {
+        "store_id": "INT PRIMARY KEY",
+        "manager_staff_id": "INT FOREIGN KEY REFERENCES staff(staff_id)",
+        "address_id": "INT FOREIGN KEY REFERENCES address(address_id)",
+        "last_update": "TIMESTAMP"
+      }
+    }
+  }
+} 

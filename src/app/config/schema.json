@@ -1,0 +1,41 @@
+{
+  "database": "world",
+  "tables": {
+    "country": {
+      "columns": {
+        "Code": "CHAR(3) PRIMARY KEY",
+        "Name": "VARCHAR(52)",
+        "Continent": "ENUM('Asia','Europe','North America','Africa','Oceania','Antarctica','South America')",
+        "Region": "VARCHAR(26)",
+        "SurfaceArea": "FLOAT",
+        "IndepYear": "SMALLINT",
+        "Population": "INT",
+        "LifeExpectancy": "FLOAT",
+        "GNP": "FLOAT",
+        "GNPOld": "FLOAT",
+        "LocalName": "VARCHAR(45)",
+        "GovernmentForm": "VARCHAR(45)",
+        "HeadOfState": "VARCHAR(60)",
+        "Capital": "INT FOREIGN KEY REFERENCES city(ID)",
+        "Code2": "CHAR(2)"
+      }
+    },
+    "city": {
+      "columns": {
+        "ID": "INT PRIMARY KEY",
+        "Name": "VARCHAR(35)",
+        "CountryCode": "CHAR(3) FOREIGN KEY REFERENCES country(Code)",
+        "District": "VARCHAR(20)",
+        "Population": "INT"
+      }
+    },
+    "countrylanguage": {
+      "columns": {
+        "CountryCode": "CHAR(3) FOREIGN KEY REFERENCES country(Code)",
+        "Language": "VARCHAR(30)",
+        "IsOfficial": "ENUM('T','F')",
+        "Percentage": "FLOAT"
+      }
+    }
+  }
+}
